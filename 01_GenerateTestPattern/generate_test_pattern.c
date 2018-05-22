@@ -4,7 +4,7 @@
 unsigned char *frame_buffer;
 unsigned char *frame_buffer_orig;
 
-void fillBuffer(unsigned char *buffer, int width, int height)
+void fillBuffer(unsigned char *buffer, int width, int height, int color)
 {
     int row, col;
     unsigned char y, u, v;
@@ -12,6 +12,67 @@ void fillBuffer(unsigned char *buffer, int width, int height)
     y = 0x00;
     u = 0x80;
     v = 0x80;
+
+    if(color == 0)
+    {
+        y = 0x00;
+        u = 0x00;
+        v = 0x00;
+    }
+    else if(color == 1)
+    {
+        y = 0x00;
+        u = 0x00;
+        v = 0xFF;
+    }
+    else if(color == 2)
+    {
+        y = 0x00;
+        u = 0xFF;
+        v = 0x00;
+    }
+    else if(color == 3)
+    {
+        y = 0x00;
+        u = 0xFF;
+        v = 0xFF;
+    }
+    else if(color == 4)
+    {
+        y = 0xFF;
+        u = 0x00;
+        v = 0x00;
+    }
+    else if(color == 5)
+    {
+        y = 0xFF;
+        u = 0x00;
+        v = 0xFF;
+    }
+    else if(color == 6)
+    {
+        y = 0xFF;
+        u = 0xFF;
+        v = 0x00;
+    }
+    else if(color == 7)
+    {
+        y = 0xFF;
+        u = 0xFF;
+        v = 0xFF;
+    }
+    else if(color == 8)
+    {
+        y = 0x00;
+        u = 0x80;
+        v = 0x80;
+    }
+    else if(color == 9)
+    {
+        y = 0xFF;
+        u = 0x80;
+        v = 0x80;
+    }
 
     for(row = 0; row < height; row++)
     {
@@ -27,7 +88,7 @@ void fillBuffer(unsigned char *buffer, int width, int height)
 
 int main(int argc, char* argv[])
 {
-    int width, height, num_frames, frame;
+    int width, height, num_frames, frame, color;
     FILE *fout;
 
     if(argc < 6)
@@ -50,6 +111,7 @@ int main(int argc, char* argv[])
     width = atoi(argv[1]);
     height = atoi(argv[2]);
     num_frames = atoi(argv[3]);
+    color = atoi(argv[5]);
 
     if((fout = fopen(argv[4], "wb")) == NULL)
     {
@@ -61,8 +123,8 @@ int main(int argc, char* argv[])
     frame_buffer = (unsigned char*) malloc(width * height * 2);
     frame_buffer_orig = (unsigned char*) malloc(width * height * 2);
 
-    fillBuffer(frame_buffer, width, height);
-    fillBuffer(frame_buffer_orig, width, height);
+    fillBuffer(frame_buffer, width, height, color);
+    fillBuffer(frame_buffer_orig, width, height, color);
 
     for(frame = 0; frame < num_frames; frame++)
     {
