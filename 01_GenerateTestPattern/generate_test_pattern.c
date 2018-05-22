@@ -126,7 +126,9 @@ int main(int argc, char* argv[])
     for(frame = 0; frame < num_frames; frame++)
     {
         fwrite(frame_buffer, 1, width * height * 2, fout);
+        printf("Frame %d\n", frame);
     }
+    printf("Done.\n");
 
     fclose(fout);
     free(frame_buffer);

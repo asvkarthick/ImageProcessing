@@ -167,7 +167,9 @@ int main(int argc, char* argv[])
         addBlock(frame_buffer, width, height, block_buffer, block_width, block_height, x_next, y_next);
         calculateNextCoordinate(&x_next, &y_next, width, height, block_width, block_height);
         fwrite(frame_buffer, 1, width * height * 2, fout);
+        printf("Frame %d\n", frame);
     }
+    printf("Done.\n");
 
     fclose(fout);
     free(frame_buffer);
