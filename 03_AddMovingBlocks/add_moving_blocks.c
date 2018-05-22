@@ -107,7 +107,7 @@ void calculateNextCoordinate(int* x, int* y, int width_image, int height_image, 
     int x_next, y_next;
     int update_y = 0;
 
-    if(x_prev + width_block > width_image)
+    if(x_prev + width_block >= width_image)
     {
         x_next = 0;
         update_y = 1;
@@ -119,7 +119,7 @@ void calculateNextCoordinate(int* x, int* y, int width_image, int height_image, 
 
     if(update_y)
     {
-        if(y_prev + height_block > height_image)
+        if(y_prev + height_block >= height_image)
             y_next = 0;
         else
             y_next = y_prev + height_block;
@@ -127,6 +127,8 @@ void calculateNextCoordinate(int* x, int* y, int width_image, int height_image, 
 
     *x = x_next;
     *y = y_next;
+
+    // printf("x = %d, y = %d\n", *x, *y);
 }
 
 int main(int argc, char* argv[])
@@ -165,8 +167,10 @@ int main(int argc, char* argv[])
     for(frame = 0; frame < num_frames; frame++)
     {
         addBlock(frame_buffer, width, height, block_buffer, block_width, block_height, x_next, y_next);
-        calculateNextCoordinate(&x_next, &y_next, width, height, block_width, block_height);
         fwrite(frame_buffer, 1, width * height * 2, fout);
+        calculateNextCoordinate(&x_next, &y_next, width, height, block_width, block_height);
+        if(x_next == 0 && y_next == 0)
+            memcpy(frame_buffer, frame_buffer_orig, width * 2 * height);
         printf("Frame %d\n", frame);
     }
     printf("Done.\n");
