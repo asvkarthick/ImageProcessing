@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 unsigned char *frame_buffer;
-unsigned char *frame_buffer_orig;
 
 void fillBuffer(unsigned char *buffer, int width, int height, int color)
 {
@@ -121,10 +120,8 @@ int main(int argc, char* argv[])
 
     // Allocate memory
     frame_buffer = (unsigned char*) malloc(width * height * 2);
-    frame_buffer_orig = (unsigned char*) malloc(width * height * 2);
 
     fillBuffer(frame_buffer, width, height, color);
-    fillBuffer(frame_buffer_orig, width, height, color);
 
     for(frame = 0; frame < num_frames; frame++)
     {
@@ -133,7 +130,6 @@ int main(int argc, char* argv[])
 
     fclose(fout);
     free(frame_buffer);
-    free(frame_buffer_orig);
 
     return 0;
 }
