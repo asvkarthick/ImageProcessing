@@ -1,3 +1,11 @@
+// This program generates YUV (YUV422 - YUYV) file with frames of specified color
+
+// Compile this program with
+// gcc generate_test_pattern.c -o generate_test_pattern
+
+// Run this progam with the following command to generate Yellow color frames
+// ./generate_test_pattern 352 288 300 output.yuv 5
+
 #include <stdio.h>
 #include <stdlib.h>
 
