@@ -6,3 +6,6 @@ http://trace.eas.asu.edu/yuv/
 
 To understand about the YUV pixel values please refer
 http://dspfans.blogspot.com/2018/05/yuv-pixel-values.html
+
+YUV player can be downloaded for Linux for free at
+https://www.offminor.de/downloads.html
