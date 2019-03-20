@@ -26,7 +26,7 @@ void yuv2rgb(unsigned char *src, unsigned char *dst, int width, int height)
             v = src[width * height + (width >> 1) * (height >> 1) + (row >> 1) * (width >> 1) + (col >> 1)];
             r = (unsigned char) CLIP((int)(1.0 * y + 1.13983 * v), 0, 255);
             g = (unsigned char) CLIP((int)(1.0 * y -0.39465 * u -0.58060 * v), 0, 255);
-            b = (unsigned char) CLIP((int)(1.164 * y + 2.032 * u), 0, 255);
+            b = (unsigned char) CLIP((int)(1.0 * y + 2.03211 * u), 0, 255);
             dst[row * width * 3 + col * 3] = r;
             dst[row * width * 3 + col * 3 + 1] = g;
             dst[row * width * 3 + col * 3 + 2] = b;
