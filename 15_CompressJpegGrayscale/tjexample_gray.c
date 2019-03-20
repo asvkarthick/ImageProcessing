@@ -32,6 +32,13 @@
  * images using the TurboJPEG C API
  */
 
+/*
+ *Program to compress grayscale image in JPEG format
+ *
+ * This requires external library called libjpeg-turbo and I will add
+ * steps to link with that library shortly
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
