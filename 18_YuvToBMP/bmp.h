@@ -1,5 +1,10 @@
 #include <stdio.h>
 
+/*
+ * BMP Header information can be found at
+ * http://www.fastgraph.com/help/bmp_header_format.html
+ */
+
 struct BITMAPFILEHEADER
 {
     unsigned short signature;
