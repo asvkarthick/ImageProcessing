@@ -6,6 +6,9 @@
 // Run this program with
 // ./yuv2rgb <yuv_file> <rgb_file> <width> <height>
 
+// The conversion formula has been taken from
+// https://www.scribd.com/document/117222158/Converting-Between-YUV-and-RGB
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -16,6 +19,7 @@ void yuv2rgb(unsigned char *src, unsigned char *dst, int width, int height)
     int row, col;
     unsigned char y, u, v;
     unsigned char r, g, b;
+    int c, d, e;
 
     for(row = 0; row < height; row++)
     {
@@ -24,9 +28,15 @@ void yuv2rgb(unsigned char *src, unsigned char *dst, int width, int height)
             y = src[row * width + col];
             u = src[width * height + (row >> 1) * (width >> 1) + (col >> 1)];
             v = src[width * height + (width >> 1) * (height >> 1) + (row >> 1) * (width >> 1) + (col >> 1)];
-            r = (unsigned char) CLIP((int)(1.0 * y + 1.13983 * v), 0, 255);
-            g = (unsigned char) CLIP((int)(1.0 * y -0.39465 * u -0.58060 * v), 0, 255);
-            b = (unsigned char) CLIP((int)(1.0 * y + 2.03211 * u), 0, 255);
+
+            c = y - 16;
+            d = u - 128;
+            e = v - 128;
+
+            r = (unsigned char) CLIP(((298 * c + 409 * e + 128) >> 8), 0, 255);
+            g = (unsigned char) CLIP(((298 * c  - 100 * d - 208 * 3 + 128) >> 8), 0, 255);
+            b = (unsigned char) CLIP(((298 * c + 516 * d + 128) >> 8), 0, 255);
+
             dst[row * width * 3 + col * 3] = r;
             dst[row * width * 3 + col * 3 + 1] = g;
             dst[row * width * 3 + col * 3 + 2] = b;
