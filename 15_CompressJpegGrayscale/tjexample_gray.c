@@ -28,11 +28,6 @@
  */
 
 /*
- * This program demonstrates how to compress, decompress, and transform JPEG
- * images using the TurboJPEG C API
- */
-
-/*
  *Program to compress grayscale image in JPEG format
  *
  * This requires external library called libjpeg-turbo and I will add
